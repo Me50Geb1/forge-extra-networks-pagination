@@ -1,0 +1,263 @@
+/* Forge Extra Networks Pagination v10
+   Integrated into Neo's native LoRA controls toolbar (same toolbar used by Civitai Helper). */
+.enp-pager-toolbar {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3px;
+    box-sizing: border-box;
+    margin: 0 2px;
+    padding: 0;
+    min-width: max-content;
+    height: 28px;
+    background: transparent !important;
+    color: var(--body-text-color, #e8edf5) !important;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.enp-pager-integrated { align-self: center; }
+.enp-pager-toolbar .enp-btn,
+.enp-pager-toolbar .enp-size-btn {
+    min-width: 26px;
+    height: 27px;
+    padding: 0 6px;
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid var(--button-secondary-border-color, #465064) !important;
+    border-radius: 6px;
+    background: var(--button-secondary-background-fill, #222936) !important;
+    color: var(--button-secondary-text-color, #eef2f8) !important;
+    box-shadow: none !important;
+}
+.enp-pager-toolbar .enp-btn:hover:not(:disabled),
+.enp-pager-toolbar .enp-size-btn:hover {
+    background: var(--button-secondary-background-fill-hover, #30394a) !important;
+}
+.enp-pager-toolbar .enp-btn:disabled { opacity: .38; cursor: default; }
+.enp-pager-toolbar .enp-page-label { color: var(--body-text-color, #eef2f8) !important; }
+.enp-pager-toolbar .enp-total { color: var(--body-text-color-subdued, #c7cfda) !important; opacity: .92; }
+[id$="_lora_cards"].enp-loading,
+[id$="_loras_cards"].enp-loading { opacity: .55; pointer-events: none; }
+.enp-error, .enp-no-results { padding: 14px; opacity: .85; }
+.enp-size-wrap { position: relative; display: inline-flex; align-items: center; }
+.enp-pager-toolbar .enp-size-btn { min-width: 54px; }
+.enp-pager-toolbar .enp-size-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    z-index: 10001;
+    min-width: 58px;
+    padding: 3px;
+    border: 1px solid var(--border-color-primary, #465064);
+    border-radius: 6px;
+    background: var(--background-fill-primary, #151922) !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,.45);
+}
+.enp-pager-toolbar .enp-size-menu[hidden] { display: none !important; }
+.enp-pager-toolbar .enp-size-option {
+    display: block;
+    width: 100%;
+    min-width: 52px;
+    height: 26px;
+    margin: 0;
+    padding: 0 7px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--background-fill-primary, #151922) !important;
+    color: var(--body-text-color, #ffffff) !important;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+}
+.enp-pager-toolbar .enp-size-option:hover {
+    background: var(--background-fill-secondary, #30394a) !important;
+}
+@media (max-width: 1050px) { .enp-pager-toolbar .enp-total { display: none; } }
+
+/* v11: page-size chooser is a real vertical menu, not a toolbar-like row. */
+.enp-pager-toolbar .enp-size-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    min-width: 72px !important;
+    padding: 4px !important;
+}
+.enp-pager-toolbar .enp-size-menu[hidden] {
+    display: none !important;
+}
+.enp-pager-toolbar .enp-size-option {
+    display: flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 64px !important;
+    height: 30px !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid var(--border-color-primary, #465064) !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+}
+.enp-pager-toolbar .enp-size-option:first-child {
+    border-radius: 5px 5px 0 0 !important;
+}
+.enp-pager-toolbar .enp-size-option:last-child {
+    border-bottom: 0 !important;
+    border-radius: 0 0 5px 5px !important;
+}
+
+/* v12: Forge/A1111 loads extension-root style.css automatically.
+   Force the page-size popup to be a vertical, clearly separated menu. */
+.enp-pager-toolbar .enp-size-wrap {
+    position: relative !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+.enp-pager-toolbar .enp-size-menu {
+    position: absolute !important;
+    top: calc(100% + 5px) !important;
+    right: 0 !important;
+    left: auto !important;
+    z-index: 10050 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    width: 76px !important;
+    min-width: 76px !important;
+    height: auto !important;
+    padding: 4px !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    background: #171b24 !important;
+    border: 1px solid #465064 !important;
+    border-radius: 7px !important;
+    box-shadow: 0 5px 16px rgba(0,0,0,.55) !important;
+}
+.enp-pager-toolbar .enp-size-menu[hidden] {
+    display: none !important;
+}
+.enp-pager-toolbar .enp-size-option {
+    box-sizing: border-box !important;
+    display: block !important;
+    position: static !important;
+    float: none !important;
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 31px !important;
+    min-height: 31px !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #394150 !important;
+    border-radius: 0 !important;
+    background: #171b24 !important;
+    color: #f1f5f9 !important;
+    text-align: center !important;
+    line-height: 31px !important;
+    font: inherit !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+}
+.enp-pager-toolbar .enp-size-option:hover,
+.enp-pager-toolbar .enp-size-option:focus {
+    background: #2c3442 !important;
+    color: #ffffff !important;
+    outline: none !important;
+}
+.enp-pager-toolbar .enp-size-option:first-child {
+    border-radius: 4px 4px 0 0 !important;
+}
+.enp-pager-toolbar .enp-size-option:last-child {
+    border-bottom: 0 !important;
+    border-radius: 0 0 4px 4px !important;
+}
+
+
+/* v13: click the "1 / N" label to jump directly to a page. */
+.enp-page-wrap {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+.enp-pager-toolbar .enp-page-jump-btn {
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 64px !important;
+    height: 27px !important;
+    padding: 0 7px !important;
+    margin: 0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 6px !important;
+    background: transparent !important;
+    color: var(--body-text-color, #eef2f8) !important;
+    font: inherit !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+}
+.enp-pager-toolbar .enp-page-jump-btn:hover,
+.enp-pager-toolbar .enp-page-jump-btn[aria-expanded="true"] {
+    border-color: var(--button-secondary-border-color, #465064) !important;
+    background: var(--button-secondary-background-fill, #222936) !important;
+}
+.enp-page-menu {
+    position: absolute !important;
+    top: calc(100% + 5px) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10050 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 76px !important;
+    max-height: 360px !important;
+    overflow-y: auto !important;
+    padding: 4px !important;
+    background: #171b24 !important;
+    border: 1px solid #465064 !important;
+    border-radius: 7px !important;
+    box-shadow: 0 5px 16px rgba(0,0,0,.55) !important;
+}
+.enp-page-menu[hidden] { display: none !important; }
+.enp-page-option {
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    height: 30px !important;
+    min-height: 30px !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #394150 !important;
+    background: #171b24 !important;
+    color: #f1f5f9 !important;
+    text-align: center !important;
+    line-height: 30px !important;
+    font: inherit !important;
+    font-size: 12px !important;
+    cursor: pointer !important;
+}
+.enp-page-option:hover { background: #2c3442 !important; color: #fff !important; }
+.enp-page-option.is-current {
+    background: #34445d !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+}
+.enp-page-gap {
+    height: 22px !important;
+    line-height: 22px !important;
+    text-align: center !important;
+    color: #9aa6b5 !important;
+    border-bottom: 1px solid #394150 !important;
+    user-select: none !important;
+}
