@@ -1,27 +1,86 @@
-# Forge Extra Networks Pagination v10
+# Forge Extra Networks Pagination
 
-Forge Neo の純正 LoRA Extra Networks をページングします。
+Pagination extension for the LoRA Extra Networks panel in **sd-webui-forge-neo**.
 
-- Neo純正LoRAツールバーへページャーを統合
-- Civitai Helper のリロードボタンと同じツールバーを使用
-- 浮動/固定配置を廃止し、スクロールしても位置が動かない
-- 25 / 50 / 100 / 200件/ページ
-- フォルダ・検索・純正カード機能を維持
+LoRAの数が多い環境で、Extra NetworksのLoRAカードを全件一括表示せず、ページ単位で表示するための拡張です。
+この拡張はChatGPTの支援により作成されています。
+リポジトリ所有者は技術的な質問、サポート、実装に関する問い合わせには対応できない場合があります。
 
+## Features
 
-## v11
-- 表示件数メニューを縦並びに変更し、各項目に区切りを追加。
-- 60件表示を追加。
-- 既定の表示件数を60件へ変更。
-- 選択肢: 25 / 50 / 60 / 100 / 200。
+- LoRA Extra Networksをページ分割表示
+- 1ページあたりの表示件数を変更可能
+  - 25
+  - 50
+  - 60
+  - 100
+  - 200
+- デフォルトは60件表示
+- 前後ページ移動
+- ページ番号をクリックして直接ジャンプ
+- フォルダ選択に対応
+- LoRA検索に対応
+- txt2img / img2img 両対応
+- Forge Neo純正のLoRAカードを使用
+- ダークモード対応
+- Civitai HelperなどのExtra Networks拡張との併用を考慮
 
-## v12
-- Forge Neo/A1111が自動読込する拡張ルートの `style.css` を追加。
-- 表示件数メニューを 25 / 50 / 60 / 100 / 200 の縦並びに固定。
-- 各項目の区切り線、ホバー表示、ダーク背景を明示。
-- 既定表示件数は60件のまま。
+## Purpose
 
+Forge NeoのLoRAタブは画像付きで非常に使いやすい一方、
+LoRAの数が増えると大量のカードを一度に表示するため、
+Extra Networksの表示に時間がかかる場合があります。
 
-## v13
-- `1 / N` をクリックするとページジャンプメニューを表示します。
-- 12ページ以下は全ページ番号を表示。多い場合は先頭・現在周辺・末尾を表示します。
+この拡張ではLoRAカードを一定件数ごとにページ分割し、
+一度に表示するカード数を減らします。
+
+## Installation
+
+Clone this repository into the `extensions` directory of sd-webui-forge-neo.
+
+```bash
+git clone https://github.com/Me50Geb1/forge-extra-networks-pagination.git
+
+配置例:
+sd-webui-forge-neo/
+└─ extensions/
+   └─ forge-extra-networks-pagination/
+      ├─ javascript/
+      ├─ scripts/
+      ├─ README.md
+      └─ style.css
+Forge Neoを再起動してください。
+
+Usage
+
+LoRA Extra Networksを開くと、上部ツールバーにページ操作UIが追加されます。
+
+◀  1 / 12  ▶  60 ▼  687件
+◀ : 前のページ
+▶ : 次のページ
+1 / 12 : クリックするとページジャンプ
+60 : 1ページあたりの表示件数
+687件 : 現在の対象LoRA総数
+
+Compatibility
+
+Main target:sd-webui-forge-neo
+
+The extension is designed to preserve the standard Extra Networks card behavior as much as possible.
+
+Tested together with:
+・Stable-Diffusion-Webui-Civitai-Helper
+・lora-prompt-tool
+
+## Notes
+
+This extension modifies the LoRA Extra Networks display behavior only.
+
+It does not modify LoRA model files or generation behavior.
+
+This extension was created with the assistance of ChatGPT.
+The repository owner may not be able to answer technical questions, provide support, or respond to implementation-related inquiries.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
