@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 - 2026-09-01
+
+### Added
+
+- Automatically refresh Civitai Helper decorations after each successful LoRA page render
+- Apply the refresh to page navigation, direct jumps, page-size changes, searches, and folder changes
+- Use a short debounce and remain a no-op when Civitai Helper is not installed
+
 ## 1.0.0 - 2026-09-01
 
 Initial public release.

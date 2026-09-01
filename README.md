@@ -22,6 +22,7 @@ LoRAの数が多い環境で、Extra NetworksのLoRAカードを全件一括表�
 - Forge Neo純正のLoRAカードを使用
 - ダークモード対応
 - Civitai HelperなどのExtra Networks拡張との併用を考慮
+- ページ切り替え後にCivitai Helperのカード更新を自動実行
 
 ## Purpose
 
@@ -71,7 +72,7 @@ The extension is designed to preserve the standard Extra Networks card behavior 
 
 Tested together with:
 
-- Stable-Diffusion-Webui-Civitai-Helper
+- Stable-Diffusion-Webui-Civitai-Helper-Neo 1.13.0以降
 - lora-prompt-tool
 
 ## Notes

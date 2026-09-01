@@ -22,6 +22,7 @@
                 busy: false,
                 seq: 0,
                 timer: null,
+                civitaiRefreshTimer: null,
                 initialLoaded: false,
             });
         }
@@ -227,6 +228,26 @@
         return parts.slice(-2).join("/") || s;
     }
 
+    function triggerCivitaiHelperRefresh(tab) {
+        const st = stateFor(tab);
+        clearTimeout(st.civitaiRefreshTimer);
+        st.civitaiRefreshTimer = setTimeout(() => {
+            const r = root();
+            const button =
+                r.querySelector(`#${CSS.escape(tab)}_lora_ch_refresh`) ||
+                r.querySelector(`#${CSS.escape(tab)}_loras_ch_refresh`);
+            if (!button) return;
+
+            try {
+                // Pagination replaces the card DOM. Reapply Civitai Helper's
+                // buttons and preview decorations to the newly rendered page.
+                button.click();
+            } catch (error) {
+                console.warn("[Extra Networks Pagination] Civitai Helper refresh failed", error);
+            }
+        }, 80);
+    }
+
     async function refresh(tab, requestedPage = 1) {
         const cards = cardsFor(tab);
         if (!cards) return;
@@ -253,6 +274,7 @@
             try {
                 if (typeof window.setupAllResizeHandles === "function") window.setupAllResizeHandles();
             } catch (_) {}
+            triggerCivitaiHelperRefresh(tab);
             document.dispatchEvent(new CustomEvent("enp:lora-page-changed", {detail: {tab, data}}));
         } catch (e) {
             console.error("[Extra Networks Pagination]", e);
